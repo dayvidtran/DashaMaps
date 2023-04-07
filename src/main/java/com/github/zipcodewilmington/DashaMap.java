@@ -1,5 +1,7 @@
 package com.github.zipcodewilmington;
 
+import java.time.chrono.MinguoDate;
+
 /**
  * @author xtofer
  * @version 1.0.0
@@ -19,28 +21,47 @@ public class DashaMap implements HashMapX {
     public void set(String key, String value) {
         int idx = HashFunctionOne(key);
         Node current = arr[idx];
-        if (current==null){
-            current = new Node(key, value);
+        if (current == null) {
+            arr[idx] = new Node(key, value);
+            return;
         }
-        while (current.getNext() != null){
+        while (current.getNext() != null) {
             current = current.getNext();
         }
-        current.setNext( new Node(key, value);
+        current.setNext(new Node(key, value));
     }
 
     @Override
     public String delete(String key) {
+        Node current = arr[HashFunctionOne(key)];
+        Node previous = null;
+        while (current != null) {
+            if (current.getKey().equals(key)) {
+                String val = current.getData();
+                current = current.getNext();
+                previous.setNext(current);
+                return val;
+            }
+            previous = current;
+            current = current.getNext();
+        }
         return null;
     }
 
     @Override
     public String get(String key) {
+        int index = HashFunctionOne(key);
+        Node current = arr[index];
+        while (current != null) {
+            if (current.getKey().equals(key))
+                return current.getData();
+        }
         return null;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size() == 0;
     }
 
     @Override
@@ -50,7 +71,7 @@ public class DashaMap implements HashMapX {
 
             Node current = arr[i];
 
-            while (current != null){
+            while (current != null) {
                 count++;
                 current = current.getNext();
             }
@@ -61,9 +82,9 @@ public class DashaMap implements HashMapX {
     @Override
     public long bucketSize(String key) {
         long count = 0;
-        Node current =  arr[HashFunctionOne(key)];
+        Node current = arr[HashFunctionOne(key)];
 
-        while(current != null){
+        while (current != null) {
             count++;
             current = current.getNext();
         }

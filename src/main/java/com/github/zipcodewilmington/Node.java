@@ -22,13 +22,6 @@ public class Node {
         this.key = key;
     }
 
-    public String getvalue(){
-        return value;
-    }
-
-    public void setvalue(String value){
-        this.value = value;
-    }
 
     public Node getNext(){
         return next;
@@ -37,4 +30,10 @@ public class Node {
     public void setNext(Node node){
         this.next = node;
     }
+
+    public String getData() {
+        return value;
+    }
+
+
 }
