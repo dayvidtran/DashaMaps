@@ -2,21 +2,32 @@ package com.github.zipcodewilmington;
 
 public class Node {
 
-    String data;
+    String value;
+
+    String key;
 
     Node next;
 
-    public Node(String data){
-        this.data= data;
+    public Node(String key ,String value){
+        this.value= value;
+        this.key = key;
         next = null;
     }
 
-    public String getData(){
-        return data;
+    public String getKey() {
+        return key;
     }
 
-    public void setData(String data){
-        this.data = data;
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getvalue(){
+        return value;
+    }
+
+    public void setvalue(String value){
+        this.value = value;
     }
 
     public Node getNext(){
